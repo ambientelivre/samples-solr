@@ -1,0 +1,17 @@
+services:
+  solr:
+    image: ${SOLR_IMAGE}
+    container_name: solr-container
+    ports:
+      - "8685:8983"
+    volumes:
+      - ${HOST_DATA_DIR}:/var/solr
+      - ./security.json:/var/solr/data/security.json
+      - ./logs:/var/solr/logs
+    environment:
+      - SOLR_HEAP=${SOLR_HEAP}
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    restart: unless-stopped
