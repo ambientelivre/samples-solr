@@ -1,0 +1,15 @@
+version: '3'
+services:
+  solr:
+    image: solr
+    ports:
+     - "8983:8983"
+    volumes:
+      - data:/var/solr
+    security_opt:
+      - seccomp=unconfined
+    command:
+      - solr-precreate
+      - gettingstarted
+volumes:
+  data:
